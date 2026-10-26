@@ -1,7 +1,7 @@
 # EV Charging Duration Analysis
 
 This repository contains the Python analysis code for the project report **EV Charging Duration Analysis**.
-
+\
 ## Research question
 Does charging duration differ across Level 1, Level 2 and DC Fast Charger sessions?
 
