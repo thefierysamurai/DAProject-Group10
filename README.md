@@ -1,66 +1,71 @@
 # EV Charging Duration Analysis
 
-This repository contains the Python analysis code for the project report **EV Charging Duration Analysis**.
-\
-## Research question
-Does charging duration differ across Level 1, Level 2 and DC Fast Charger sessions?
+A Data Analytics project investigating whether charging duration differs between **Level 1, Level 2, and DC Fast Charger** sessions.
 
 ## Dataset
-Download `ev_charging_patterns.csv` from:
-https://www.kaggle.com/datasets/valakhorasani/electric-vehicle-charging-patterns
 
-Place the CSV in this folder, or pass its location to the script. The dataset is not included in this repository; follow Kaggle's terms and the dataset licence when sharing data.
+- **Name:** Electric Vehicle Charging Patterns
+- **Source:** [Kaggle dataset](https://www.kaggle.com/datasets/valakhorasani/electric-vehicle-charging-patterns)
+- Download `ev_charging_patterns.csv` and place it in the same folder as `analysis.py`. The dataset is not included in the GitHub repository.
 
-## Install requirements
-Python 3.9 or newer is recommended.
+## What the project does
 
-```bash
-python -m pip install -r requirements.txt
+The Python script performs:
+- Data quality checks for missing values and duplicate rows
+- Descriptive statistics and exploratory data analysis
+- A missing-values chart, charging-duration boxplot, and energy-versus-duration scatterplot
+- Z-score normalisation and Pearson correlation
+- One-way ANOVA and Kruskal–Wallis hypothesis tests
+
+The heatmap is intentionally excluded to match the project report.
+
+## Project files
+
+```text
+EV-Charging-Duration-Analysis/
+├── analysis.py
+├── README.md
+├── requirements.txt
+└── .gitignore
 ```
 
-## Run
-```bash
-python analysis.py --data ev_charging_patterns.csv
-```
+After running the script, results are saved in an `outputs/` folder as CSV summaries and PNG charts.
 
-To choose another output folder:
-```bash
-python analysis.py --data "path/to/ev_charging_patterns.csv" --output outputs
-```
+## Setup and run
 
-## What the script does
-1. Loads the CSV and inspects its dimensions.
-2. Checks missing values and exact duplicate rows.
-3. Uses records with non-missing charging duration and charger type for the main comparison.
-4. Calculates count, mean, median, standard deviation, minimum and maximum duration by charger type.
-5. Demonstrates z-score normalisation using the sample standard deviation.
-6. Tests the hypotheses with one-way ANOVA and Kruskal–Wallis at alpha = 0.05.
-7. Calculates Pearson correlations between charging duration and selected numeric variables using complete pairs.
-8. Saves three report figures: missing-values chart, charger-duration boxplot, and energy-duration scatterplot.
+1. Install Python 3.9 or newer.
+2. Download the dataset CSV and place it beside `analysis.py`.
+3. Open a terminal in the project folder and install the required libraries:
 
-The heatmap is intentionally omitted from the outputs because it was excluded from the submitted report.
+   ```bash
+   python -m pip install -r requirements.txt
+   ```
 
-## Hypotheses
-- **H0:** Mean charging duration is equal across the three charger categories.
-- **H1:** At least one category has a different mean charging duration.
-- **Significance level:** alpha = 0.05.
+4. Run the analysis:
 
-A p-value below 0.05 leads to rejection of H0; otherwise, the result is reported as “fail to reject H0.” A non-significant result is not proof that the groups are identical.
+   ```bash
+   python analysis.py
+   ```
 
-## Data handling notes
-- Missing values are not imputed.
-- Correlations use complete records for each variable pair.
-- Exact duplicate rows are counted and reported, not silently removed.
-- State-of-charge values outside the usual 0–100% range are not automatically changed.
-- No heatmap is generated.
+On some systems, use `python3` instead of `python`.
 
-## Outputs
-The script creates an `outputs/` folder with CSV summaries:
-- `data_quality_summary.csv`
-- `missing_values_summary.csv`
-- `duration_summary_by_charger.csv`
-- `z_score_summary.csv`
-- `hypothesis_test_results.csv`
-- `duration_correlations.csv`
+## Hypothesis tests
 
-It also creates `outputs/figures/` with the three PNG charts.
+- **H₀:** Mean charging duration is equal across the three charger types.
+- **H₁:** At least one charger type has a different mean duration.
+- **Significance level:** 0.05.
+
+ANOVA compares group means; Kruskal–Wallis provides a non-parametric comparison. A p-value below 0.05 is treated as statistically significant. Pearson correlation measures linear association, not causation.
+
+## Notes
+
+Missing values are reported rather than filled with invented values. Correlations use records with valid values for each variable pair. The results describe this dataset and should not automatically be generalised to all EV charging sessions.
+
+## Project team
+
+- August Kumar Sasmal — Roll No. Q051
+- Brijesh Kumar Jha — Roll No. Q053
+- Madhavan Balachandra Menon — Roll No. Q043
+- Surya S Shenoy — Roll No. Q032
+
+
